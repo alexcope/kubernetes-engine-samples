@@ -1,0 +1,19 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: myserver
+  labels:
+    app: hello
+spec:
+  template:
+    metadata:
+      labels:
+        app: hello
+        tier: web
+    spec:
+      containers:
+      - name: myserver
+        image: gcr.io/alexcope-gke-dev/myserver:v0.1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
