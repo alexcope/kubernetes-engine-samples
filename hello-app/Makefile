@@ -7,8 +7,6 @@ container: hello-app
 push: container
 	gcloud docker -- push gcr.io/alexcope-gke-dev/myserver:v0.1
 
-test: push
-	kubectl delete pod --all
-	EXTERNALIP=$(kubectl get services -o=json | jq '.items[] | select(.metadata.name == "myserver") | .status.loadBalancer.ingress[].ip ' | sed 's/\"//g')
-	curl $EXTERNALIP:8080
+test: push test.sh
+	./test.sh
 # .PHONY: hello-app container push
